@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace AdresbeheerBL.Interfaces
 {
-    public interface IGemeenteRepository
+    public interface IStraatRepository
     {
-        Gemeente GeefGemeente(int gemeenteId);
-        bool HeeftGemeente(int nIScode);
-        void VoegGemeenteToe(Gemeente gemeente);
+        List<Straat> GeefStratenGemeente(int id);
     }
 }

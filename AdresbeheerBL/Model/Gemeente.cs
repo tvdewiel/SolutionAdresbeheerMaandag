@@ -16,6 +16,18 @@ namespace AdresbeheerBL.Model
         }
         public int NIScode { get; private set; }
         public string Gemeentenaam { get; private set; }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Gemeente gemeente &&
+                   NIScode == gemeente.NIScode;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(NIScode);
+        }
+
         public void ZetGemeentenaam(string naam)
         {
             if ((string.IsNullOrWhiteSpace(naam)) || !char.IsUpper(naam[0]))

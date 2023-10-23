@@ -26,5 +26,17 @@ namespace AdresbeheerBL.Services
             }
             catch(Exception ex) { throw new GemeenteServiceException("geefgemeente", ex); }
         }
+
+        public Gemeente VoegGemeenteToe(Gemeente gemeente)
+        {
+           try
+            {
+                if (gemeente == null) { throw new GemeenteServiceException("voeggemeentetoe"); }
+                if (repo.HeeftGemeente(gemeente.NIScode)) throw new GemeenteServiceException("voeggemeentetoe - gemeente bestaat reeds");
+                repo.VoegGemeenteToe(gemeente);
+                return gemeente;
+            }
+            catch(Exception ex) { throw new GemeenteServiceException("voeggemeentetoe", ex); }
+        }
     }
 }
