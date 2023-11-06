@@ -11,6 +11,8 @@ namespace AdresbeheerBL.Interfaces
     {
         Gemeente GeefGemeente(int gemeenteId);
         bool HeeftGemeente(int nIScode);
+        bool HeeftStraten(int gemeenteId);
+        void Verwijdergemeente(int gemeenteId);
         void VoegGemeenteToe(Gemeente gemeente);
     }
 }

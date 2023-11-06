@@ -27,6 +27,20 @@ namespace AdresbeheerBL.Services
             catch(Exception ex) { throw new GemeenteServiceException("geefgemeente", ex); }
         }
 
+        public void VerwijderGemeente(int gemeenteId)
+        {
+            try
+            {
+                if (!repo.HeeftGemeente(gemeenteId)) { throw new GemeenteServiceException("verwijdergemeente - gemeente bestaat niet"); }
+                if (repo.HeeftStraten(gemeenteId)) { throw new GemeenteServiceException("verwijdergemeente - straten niet leeg"); }
+                repo.Verwijdergemeente(gemeenteId);
+            }
+            catch(Exception ex)
+            {
+                throw new GemeenteServiceException("verwijdergemeente", ex);
+            }
+        }
+
         public Gemeente VoegGemeenteToe(Gemeente gemeente)
         {
            try

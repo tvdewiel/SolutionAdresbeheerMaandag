@@ -44,5 +44,15 @@ namespace AdresbeheerREST.Controllers
             }
             catch (Exception ex) { return BadRequest(ex.Message); }
         }
+        [HttpDelete("{gemeenteId}")]
+        public IActionResult DeleteGemeente(int gemeenteId)
+        {
+            try
+            {
+                gemeenteService.VerwijderGemeente(gemeenteId);
+                return NoContent();
+            }
+            catch (Exception ex) { return BadRequest(ex.Message); }
+        }
     }
 }

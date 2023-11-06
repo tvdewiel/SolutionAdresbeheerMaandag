@@ -65,6 +65,48 @@ namespace AdresbeheerDL.Repositories
             }
         }
 
+        public bool HeeftStraten(int gemeenteId)
+        {
+            string sql = "SELECT count(*) FROM straat WHERE niscode=@niscode";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                try
+                {
+                    conn.Open();
+                    cmd.CommandText = sql;
+                    cmd.Parameters.AddWithValue("@niscode", gemeenteId);
+                    int n = (int)cmd.ExecuteScalar();
+                    if (n > 0) return true; else return false;
+                }
+                catch (Exception ex)
+                {
+                    throw new GemeenteRepositoryException("HeeftStraten", ex);
+                }
+            }
+        }
+
+        public void Verwijdergemeente(int gemeenteId)
+        {
+            string sql = "DELETE FROM gemeente WHERE niscode=@niscode";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                try
+                {
+                    conn.Open();
+                    cmd.CommandText = sql;
+                    cmd.Parameters.AddWithValue("@niscode", gemeenteId);
+                    cmd.ExecuteScalar();
+                    //cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new GemeenteRepositoryException("Geefgemeente", ex);
+                }
+            }
+        }
+
         public void VoegGemeenteToe(Gemeente gemeente)
         {
             string sql = "INSERT INTO gemeente(niscode,gemeentenaam) VALUES(@niscode,@gemeentenaam)";
